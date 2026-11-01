@@ -1,1 +1,359 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para você 💙</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #07152F;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    /* Fundo de partículas */
+    #particulas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Área principal */
+    .container {
+        position: relative;
+        z-index: 1;
+        width: min(700px, 90vw);
+        height: min(610px, 76vh);
+        min-height: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 35px;
+        background: #030B1B;
+        border-radius: 30px;
+        box-shadow: 0 0 0 2px #D4EEFF;
+        transform: translateY(-25px);
+        animation: aparecer 1s ease;
+    }
+
+    .caixa {
+        position: absolute;
+        inset: 0;
+        background: #B9E3FF;
+        border: 2px solid #D4EEFF;
+        border-radius: 30px;
+        z-index: -1;
+        transform: translate(-8px, -8px);
+    }
+
+    /* Texto das mensagens */
+    #mensagem {
+        color: #101820;
+        white-space: pre-line;
+        text-align: center;
+        line-height: 1.55;
+        font-size: 15px;
+        width: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 10px;
+        animation: textoEntrar 0.5s ease;
+    }
+
+    #mensagem.longa {
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    #mensagem.media {
+        font-size: 17px;
+    }
+
+    /* Botão */
+    .area-botao {
+        position: fixed;
+        bottom: 5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    button {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        color: #07152F;
+        background: #65B9F5;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 38px;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    button:hover {
+        background: #D4EEFF;
+        transform: scale(1.06);
+        box-shadow: 0 0 18px #65B9F5;
+    }
+
+    button:active {
+        transform: scale(0.96);
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.97);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(-25px) scale(1);
+        }
+    }
+
+    @keyframes textoEntrar {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ajustes para celulares */
+    @media (max-width: 600px) {
+        .container {
+            width: 88vw;
+            height: 70vh;
+            min-height: 320px;
+            padding: 18px;
+            transform: translateY(-20px);
+        }
+
+        #mensagem {
+            font-size: 13px;
+        }
+
+        #mensagem.longa {
+            font-size: 10px;
+        }
+
+        #mensagem.media {
+            font-size: 15px;
+        }
+
+        .area-botao {
+            bottom: 4vh;
+        }
+
+        button {
+            padding: 12px 34px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="particulas"></canvas>
+
+<main class="container">
+    <div class="caixa"></div>
+    <div id="mensagem"></div>
+</main>
+
+<div class="area-botao">
+    <button onclick="trocarTexto()">clique 💙</button>
+</div>
+
+<script>
+    // =========================
+    // MENSAGENS
+    // =========================
+
+    const textos = [
+`Você é como o azul do céu:
+não precisa dizer nada para chamar atenção.
+Está simplesmente ali,
+tranquilo, bonito e impossível de ignorar.
+
+E talvez seja por isso que eu gosto tanto do azul:
+porque, quando olho para essa cor,
+é como se uma pequena parte de você
+estivesse sempre comigo.`,
+
+`Você é alguém muito importante pra mim,
+nunca se esqueça que você é e sempre vai
+ser muito incrível.`,
+
+`Você se tornou a pessoa que eu mais amo e confio.
+Mesmo em pouco tempo, você virou a única pessoa
+com quem eu quero continuar conversando, mesmo
+que eu esteja com sono ou apenas não queira falar
+com ninguém. Te ver me deixa intensamente feliz.
+Nunca imaginei que amaria alguém a esse ponto.
+
+Você é o único para quem eu conto sobre mim.
+Eu detesto falar sobre mim ou sobre algo de que
+eu goste, mas, com você, eu me sinto confortável
+o suficiente para falar qualquer besteira que
+vier à cabeça.
+
+Espero que possamos criar um futuro juntos,
+sem medo de demonstrar o que sentimos um pelo
+outro. Eu quero te mostrar que te amo de verdade
+e que o que sinto por você não é apenas uma paixão.
+Você é quem eu quero para o resto da minha vida.
+
+Mesmo que tenhamos nos conhecido há pouco tempo,
+esses foram os melhores momentos que tive.
+Muito obrigado por ter se tornado alguém que
+eu quero manter na minha vida, independentemente
+do que aconteça.
+
+Não tenho como escrever o quanto eu te amo.
+Nunca haverá palavras suficientes, capazes
+de medir o meu amor por você.`
+    ];
+
+    let indice = 0;
+
+    const mensagem = document.getElementById("mensagem");
+
+    function mostrarTexto() {
+        mensagem.classList.remove("longa", "media");
+
+        if (indice === 2) {
+            mensagem.classList.add("longa");
+        } else if (indice === 1) {
+            mensagem.classList.add("media");
+        }
+
+        mensagem.style.animation = "none";
+        void mensagem.offsetWidth;
+        mensagem.style.animation = "textoEntrar 0.5s ease";
+
+        mensagem.textContent = textos[indice];
+        mensagem.scrollTop = 0;
+    }
+
+    function trocarTexto() {
+        indice = (indice + 1) % textos.length;
+        mostrarTexto();
+    }
+
+    mostrarTexto();
+
+    // =========================
+    // PARTÍCULAS AZUIS
+    // =========================
+
+    const canvas = document.getElementById("particulas");
+    const ctx = canvas.getContext("2d");
+
+    const cores = [
+        "#A8D8FF",
+        "#6CBFFF",
+        "#3C91E6",
+        "#D4EEFF",
+        "#82CFFF",
+        "#4B70D6",
+        "#C1CFFF"
+    ];
+
+    let particulas = [];
+
+    function ajustarCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + "px";
+        canvas.style.height = window.innerHeight + "px";
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function criarParticulas() {
+        particulas = [];
+
+        for (let i = 0; i < 90; i++) {
+            particulas.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                tamanho: Math.random() * 4 + 2,
+                velocidade: Math.random() * 1.8 + 0.7,
+                tipo: Math.floor(Math.random() * 3),
+                cor: cores[Math.floor(Math.random() * cores.length)]
+            });
+        }
+    }
+
+    function desenharParticula(p) {
+        ctx.fillStyle = p.cor;
+        ctx.beginPath();
+
+        if (p.tipo === 0) {
+            ctx.arc(p.x, p.y, p.tamanho / 2, 0, Math.PI * 2);
+        } else if (p.tipo === 1) {
+            ctx.rect(p.x, p.y, p.tamanho, p.tamanho);
+        } else {
+            ctx.moveTo(p.x, p.y - p.tamanho);
+            ctx.lineTo(p.x + p.tamanho, p.y);
+            ctx.lineTo(p.x, p.y + p.tamanho);
+            ctx.lineTo(p.x - p.tamanho, p.y);
+            ctx.closePath();
+        }
+
+        ctx.fill();
+    }
+
+    function animar() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (const p of particulas) {
+            p.y += p.velocidade;
+            p.x += Math.sin(p.y / 35) * 0.4;
+
+            if (p.y > window.innerHeight + 10) {
+                p.y = -10;
+                p.x = Math.random() * window.innerWidth;
+            }
+
+            desenharParticula(p);
+        }
+
+        requestAnimationFrame(animar);
+    }
+
+    ajustarCanvas();
+    criarParticulas();
+    animar();
+
+    window.addEventListener("resize", () => {
+        ajustarCanvas();
+        criarParticulas();
+    });
+</script>
+
+</body>
+</html>
+
